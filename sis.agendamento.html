@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>TCC - Sistema de Agendamento Inteligente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    h1, h2, h3 { color: #222; }
+    ul { text-align: left; margin-left: 80px; }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      margin: 50px auto;
+      width: 80%;
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 25px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #007bff;
+      z-index: -1;
+    }
+    .timeline-item {
+      text-align: center;
+      flex: 1;
+    }
+    .timeline-item span {
+      display: block;
+      background: #007bff;
+      color: #fff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 10px;
+      line-height: 50px;
+      font-weight: bold;
+    }
+
+    /* Tecnologias */
+    .tech-icons img {
+      width: 80px;
+      margin: 15px;
+    }
+
+    /* Mockup de celular */
+    .phone-mockup {
+      width: 300px;
+      height: 600px;
+      border: 16px solid #333;
+      border-radius: 36px;
+      position: relative;
+      margin: 20px auto;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .phone-mockup::before {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 8px;
+      background: #333;
+      border-radius: 10px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #f7fafc, #edf2f7);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .app-header {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2d3748;
+    }
+    .time-slot {
+      background: #e2e8f0;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 10px 0;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .time-slot:hover {
+      background: #cbd5e0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- Slide 1 -->
+    <section>
+      <h1>Sistema de Agendamento Inteligente</h1>
+      <h3>para Pequenos Negócios</h3>
+      <p><em>TCC em Desenvolvimento de Sistemas</em></p>
+    </section>
+
+    <!-- Slide 2 -->
+    <section>
+      <h2>Problema</h2>
+      <ul>
+        <li>Confusão em marcações de horários</li>
+        <li>Atrasos frequentes</li>
+        <li>Falta de controle nas agendas</li>
+      </ul>
+      <img src="https://cdn-icons-png.flaticon.com/512/5974/5974636.png" width="150" alt="Problema">
+    </section>
+
+    <!-- Slide 3 -->
+    <section>
+      <h2>Solução Proposta</h2>
+      <p>Um aplicativo/web que organiza agendamentos com:</p>
+      <ul>
+        <li>Agendamento online</li>
+        <li>Controle de horários</li>
+        <li>Lembretes automáticos (push/e-mail)</li>
+      </ul>
+      <img src="https://cdn-icons-png.flaticon.com/512/1827/1827504.png" width="150" alt="Solução">
+    </section>
+
+    <!-- Slide 4 -->
+    <section>
+      <h2>Tecnologias</h2>
+      <div class="tech-icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java">
+        <img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" alt="Node.js">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968364.png" alt="MySQL">
+        <img src="https://cdn-icons-png.flaticon.com/512/919/919851.png" alt="React">
+      </div>
+    </section>
+
+    <!-- Slide 5: Mockup -->
+    <section>
+      <h2>Mockup do Aplicativo</h2>
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="app-header">Agende seu horário</div>
+          <div class="time-slot">09:00 - Disponível</div>
+          <div class="time-slot">10:00 - Disponível</div>
+          <div class="time-slot" style="background:#feb2b2;">11:00 - Reservado</div>
+          <div class="time-slot">12:00 - Disponível</div>
+          <div class="time-slot">13:00 - Disponível</div>
+          <div class="time-slot">14:00 - Disponível</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section>
+      <h2>Impacto Esperado</h2>
+      <canvas id="impactChart" width="600" height="400"></canvas>
+    </section>
+
+    <!-- Slide 7 -->
+    <section>
+      <h2>Linha do Tempo</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span>1</span>
+          <p>Análise</p>
+        </div>
+        <div class="timeline-item">
+          <span>2</span>
+          <p>Desenvolvimento</p>
+        </div>
+        <div class="timeline-item">
+          <span>3</span>
+          <p>Testes</p>
+        </div>
+        <div class="timeline-item">
+          <span>4</span>
+          <p>Implantação</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8 -->
+    <section>
+      <h2>Resultados Esperados</h2>
+      <ul>
+        <li>Redução de atrasos em até 40%</li>
+        <li>Maior satisfação dos clientes (até 80%)</li>
+        <li>Agendas mais organizadas e confiáveis</li>
+      </ul>
+    </section>
+
+    <!-- Slide 9 -->
+    <section>
+      <h2>Conclusão</h2>
+      <p>O Sistema de Agendamento Inteligente traz organização, eficiência e inovação aos pequenos negócios.</p>
+      <h4>Obrigado!</h4>
+    </section>
+
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    transition: 'fade',
+    slideNumber: true
+  });
+
+  // Gráfico
+  document.addEventListener("DOMContentLoaded", () => {
+    const ctx = document.getElementById("impactChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Atrasos", "Satisfação", "Falhas na Agenda"],
+        datasets: [
+          {
+            label: "Antes do Sistema",
+            data: [70, 40, 60],
+            backgroundColor: "rgba(255,99,132,0.6)"
+          },
+          {
+            label: "Com o Sistema",
+            data: [30, 80, 20],
+            backgroundColor: "rgba(54,162,235,0.6)"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" }
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
